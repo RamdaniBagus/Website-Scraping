@@ -1,0 +1,3784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.11.0 on win32)" generated="2025-12-04T11:56:38.538411" rpa="true" schemaversion="5">
+<suite id="s1" name="MonitoringBuku" source="C:\QA\MonitoringBuku">
+<suite id="s1-s1" name="Tasks" source="C:\QA\MonitoringBuku\Tasks">
+<suite id="s1-s1-s1" name="Main" source="C:\QA\MonitoringBuku\Tasks\main.robot">
+<test id="s1-s1-s1-t1" name="Run Real Price Monitoring Workflow" line="7">
+<kw name="Scrape Book Data" owner="scrape">
+<kw name="Open Book Store Website" owner="keywords_web">
+<kw name="Open Available Browser" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:40.748930" level="INFO">Webdriver version taken into use: ChromeDriver 142.0.7444.61 (9884f628acbc5ba8787e2c95a8923a30cf127fd8-refs/branch-heads/7444_52@{#6})
+</msg>
+<msg time="2025-12-04T11:56:40.749928" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg time="2025-12-04T11:56:41.984839" level="INFO">Created Chrome browser (version 142.0.7444) with arguments: --start-maximized --disable-dev-shm-usage --disable-web-security --allow-running-insecure-content --no-sandbox</msg>
+<msg time="2025-12-04T11:56:41.986985" level="INFO" html="true">&lt;p&gt;Attempted combinations:&lt;/p&gt;&lt;div class="doc"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Browser&lt;/th&gt;&lt;th&gt;Download&lt;/th&gt;&lt;th&gt;Error&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;False&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg time="2025-12-04T11:56:41.988993" level="INFO">Opening url 'https://books.toscrape.com/'</msg>
+<arg>https://books.toscrape.com/</arg>
+<arg>maximized=True</arg>
+<doc>Attempts to open a browser on the user's device from a set of
+supported browsers. Automatically downloads a corresponding webdriver
+if none is already installed.</doc>
+<status status="PASS" start="2025-12-04T11:56:39.585812" elapsed="5.367332"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:39.585812" elapsed="5.368333"/>
+</kw>
+<kw name="Extract Books From First Page" owner="keywords_web">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-12-04T11:56:44.960026" level="INFO">@{books} = [ ]</msg>
+<var>@{books}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-12-04T11:56:44.956472" elapsed="0.004033"/>
+</kw>
+<kw name="Get WebElements" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.020598" level="INFO">${elements} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.28")&gt;, &lt;selenium.webdriv...</msg>
+<var>${elements}</var>
+<arg>css:.product_pod</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:44.962539" elapsed="0.059572"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.081220" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.48")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.026458" elapsed="0.054762"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.139094" level="INFO">${title} = A Light in the ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.083292" elapsed="0.055802"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.171544" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.49")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.139094" elapsed="0.034051"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.193309" level="INFO">${price} = £51.77</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.173145" elapsed="0.021211"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.226187" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.50")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.195024" elapsed="0.031163"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.247098" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.227135" elapsed="0.020879"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.251040" level="INFO">&amp;{item} = { title=A Light in the ... | price=£51.77 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.248743" elapsed="0.002297"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.252177" elapsed="0.000868"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.28")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:45.024206" elapsed="0.229938"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.271626" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.51")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.255149" elapsed="0.017472"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.290606" level="INFO">${title} = Tipping the Velvet</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.272621" elapsed="0.019486"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.311227" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.52")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.292107" elapsed="0.019702"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.331396" level="INFO">${price} = £53.74</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.311809" elapsed="0.020760"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.352872" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.53")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.333567" elapsed="0.020370"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.372765" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.353937" elapsed="0.018828"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.374777" level="INFO">&amp;{item} = { title=Tipping the Velvet | price=£53.74 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.373763" elapsed="0.002120"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.375883" elapsed="0.000999"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.29")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:45.254144" elapsed="0.122738"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.392926" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.54")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.377878" elapsed="0.015048"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.409179" level="INFO">${title} = Soumission</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.393923" elapsed="0.017079"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.425977" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.55")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.411002" elapsed="0.016022"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.445320" level="INFO">${price} = £50.10</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.427024" elapsed="0.019149"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.464307" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.56")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.446173" elapsed="0.019721"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.487397" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.466717" elapsed="0.020680"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.489998" level="INFO">&amp;{item} = { title=Soumission | price=£50.10 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.487397" elapsed="0.002601"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.491025" elapsed="0.001153"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.30")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:45.377878" elapsed="0.115299"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.512872" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.57")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.494223" elapsed="0.018649"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.533810" level="INFO">${title} = Sharp Objects</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.512872" elapsed="0.021935"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.555185" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.58")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.534807" elapsed="0.020982"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.576265" level="INFO">${price} = £47.82</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.555789" elapsed="0.021520"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.596364" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.59")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.577309" elapsed="0.020054"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.618902" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.598359" elapsed="0.021591"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.621512" level="INFO">&amp;{item} = { title=Sharp Objects | price=£47.82 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.619950" elapsed="0.002596"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.622546" elapsed="0.002230"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.31")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:45.493177" elapsed="0.131599"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.643720" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.60")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.625775" elapsed="0.019036"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.663683" level="INFO">${title} = Sapiens: A Brief History ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.644811" elapsed="0.020077"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.678039" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.61")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.664888" elapsed="0.014148"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.691987" level="INFO">${price} = £54.23</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.679036" elapsed="0.012951"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.706069" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.62")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.691987" elapsed="0.014082"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.720602" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.706069" elapsed="0.014533"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.721970" level="INFO">&amp;{item} = { title=Sapiens: A Brief History ... | price=£54.23 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.720602" elapsed="0.002367"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.722969" elapsed="0.000999"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.32")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:45.624776" elapsed="0.099562"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.737553" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.63")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.724338" elapsed="0.013215"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.751123" level="INFO">${title} = The Requiem Red</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.738621" elapsed="0.012502"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.765125" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.64")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.752120" elapsed="0.013348"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.779266" level="INFO">${price} = £22.65</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.765468" elapsed="0.013798"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.792988" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.65")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.780264" elapsed="0.012724"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.808003" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.792988" elapsed="0.015015"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.810103" level="INFO">&amp;{item} = { title=The Requiem Red | price=£22.65 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.809106" elapsed="0.000997"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.810103" elapsed="0.001397"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.33")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:45.724338" elapsed="0.087162"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.825803" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.66")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.812498" elapsed="0.013798"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.839836" level="INFO">${title} = The Dirty Little Secrets ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.826296" elapsed="0.014539"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.853989" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.67")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.840835" elapsed="0.013154"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.867712" level="INFO">${price} = £33.34</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.854987" elapsed="0.012725"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.881516" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.68")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.868709" elapsed="0.012807"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.897718" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.881516" elapsed="0.016202"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.900633" level="INFO">&amp;{item} = { title=The Dirty Little Secrets ... | price=£33.34 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.897718" elapsed="0.003912"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.901630" elapsed="0.000996"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.34")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:45.811500" elapsed="0.091126"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.918176" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.69")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.903625" elapsed="0.014551"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.935519" level="INFO">${title} = The Coming Woman: A ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.919174" elapsed="0.016345"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.952611" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.70")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.936516" elapsed="0.017426"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:45.972220" level="INFO">${price} = £17.93</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.953942" elapsed="0.018278"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:45.990742" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.71")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.972220" elapsed="0.018859"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.010368" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:45.991079" elapsed="0.019289"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.011955" level="INFO">&amp;{item} = { title=The Coming Woman: A ... | price=£17.93 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.010368" elapsed="0.002655"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.013023" elapsed="0.001922"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.35")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:45.903625" elapsed="0.111320"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.033844" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.72")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.015943" elapsed="0.017901"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.052559" level="INFO">${title} = The Boys in the ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.034837" elapsed="0.017722"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.071791" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.73")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.053556" elapsed="0.019504"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.094127" level="INFO">${price} = £22.60</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.073060" elapsed="0.021067"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.113759" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.74")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.094127" elapsed="0.019632"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.136021" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.114753" elapsed="0.021268"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.138857" level="INFO">&amp;{item} = { title=The Boys in the ... | price=£22.60 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.136021" elapsed="0.002836"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.139856" elapsed="0.000807"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.36")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:46.014945" elapsed="0.126764"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.160086" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.75")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.141709" elapsed="0.019430"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.180733" level="INFO">${title} = The Black Maria</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.161139" elapsed="0.020761"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.200913" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.76")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.181900" elapsed="0.020012"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.222127" level="INFO">${price} = £52.15</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.202416" elapsed="0.020751"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.242383" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.77")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.223167" elapsed="0.020212"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.263140" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.243379" elapsed="0.020983"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.266391" level="INFO">&amp;{item} = { title=The Black Maria | price=£52.15 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.264362" elapsed="0.003026"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.267388" elapsed="0.000998"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.37")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:46.141709" elapsed="0.127674"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.290006" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.78")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.270383" elapsed="0.020105"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.310750" level="INFO">${title} = Starving Hearts (Triangular Trade ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.291486" elapsed="0.019988"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.325931" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.79")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.311474" elapsed="0.014457"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.340204" level="INFO">${price} = £13.99</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.325931" elapsed="0.014273"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.354426" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.80")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.341201" elapsed="0.013225"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.371013" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.354426" elapsed="0.017023"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.373108" level="INFO">&amp;{item} = { title=Starving Hearts (Triangular Trade ... | price=£13.99 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.371449" elapsed="0.001659"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.374107" elapsed="0.000997"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.38")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:46.269383" elapsed="0.105721"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.390640" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.81")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.376134" elapsed="0.014506"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.406452" level="INFO">${title} = Shakespeare's Sonnets</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.391637" elapsed="0.015849"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.423511" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.82")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.407486" elapsed="0.017397"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.442925" level="INFO">${price} = £20.66</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.424883" elapsed="0.018042"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.460201" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.83")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.442925" elapsed="0.018275"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.481291" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.462197" elapsed="0.019663"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.484338" level="INFO">&amp;{item} = { title=Shakespeare's Sonnets | price=£20.66 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.481860" elapsed="0.002478"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.485334" elapsed="0.001951"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.39")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:46.375104" elapsed="0.112181"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.507088" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.84")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.488154" elapsed="0.020185"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.527799" level="INFO">${title} = Set Me Free</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.508339" elapsed="0.020526"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.547781" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.85")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.528865" elapsed="0.020163"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.569112" level="INFO">${price} = £17.46</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.549028" elapsed="0.021131"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.589352" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.86")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.570159" elapsed="0.020190"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.611333" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.590349" elapsed="0.021981"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.615115" level="INFO">&amp;{item} = { title=Set Me Free | price=£17.46 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.612330" elapsed="0.002785"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.616299" elapsed="0.001002"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.40")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:46.488154" elapsed="0.130140"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.640039" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.87")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.619290" elapsed="0.020749"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.660940" level="INFO">${title} = Scott Pilgrim's Precious Little ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.640039" elapsed="0.020901"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.680858" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.88")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.660940" elapsed="0.020967"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.704227" level="INFO">${price} = £52.29</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.681907" elapsed="0.022786"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.725779" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.89")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.704693" elapsed="0.021086"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.747629" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.726776" elapsed="0.020853"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.748626" level="INFO">&amp;{item} = { title=Scott Pilgrim's Precious Little ... | price=£52.29 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.748626" elapsed="0.002938"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.752560" elapsed="0.000000"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.41")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:46.618294" elapsed="0.134266"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.774278" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.90")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.752560" elapsed="0.022307"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.795625" level="INFO">${title} = Rip it Up and ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.775947" elapsed="0.019678"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.816219" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.91")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.796619" elapsed="0.019600"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.838802" level="INFO">${price} = £35.02</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.818803" elapsed="0.021045"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.859482" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.92")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.839848" elapsed="0.020630"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.881454" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.860478" elapsed="0.020976"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.885031" level="INFO">&amp;{item} = { title=Rip it Up and ... | price=£35.02 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.883641" elapsed="0.002435"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.887025" elapsed="0.000000"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.42")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:46.752560" elapsed="0.134465"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.908573" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.93")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.887025" elapsed="0.021548"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.929615" level="INFO">${title} = Our Band Could Be ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.908573" elapsed="0.022270"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.951096" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.94")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.931974" elapsed="0.020162"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:46.973414" level="INFO">${price} = £57.25</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.952136" elapsed="0.022278"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:46.993767" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.95")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.974414" elapsed="0.019353"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.016412" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:46.993767" elapsed="0.023643"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.020050" level="INFO">&amp;{item} = { title=Our Band Could Be ... | price=£57.25 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.019053" elapsed="0.000997"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.020050" elapsed="0.000000"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.43")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:46.887025" elapsed="0.133025"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.043962" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.96")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.020050" elapsed="0.024761"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.066028" level="INFO">${title} = Olio</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.044811" elapsed="0.021779"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.087102" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.97")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.067702" elapsed="0.020395"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.108471" level="INFO">${price} = £23.88</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.088097" elapsed="0.020374"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.129092" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.98")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.108471" elapsed="0.021730"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.152823" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.131200" elapsed="0.022666"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.153866" level="INFO">&amp;{item} = { title=Olio | price=£23.88 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.153866" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.153866" elapsed="0.000000"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.44")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:47.020050" elapsed="0.133816"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.179616" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.99")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.153866" elapsed="0.026747"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.201436" level="INFO">${title} = Mesaerion: The Best Science ...</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.180613" elapsed="0.021563"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.222860" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.100")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.202176" elapsed="0.020684"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.243854" level="INFO">${price} = £37.59</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.222860" elapsed="0.022039"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.265205" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.101")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.244899" elapsed="0.020306"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.286488" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.265205" elapsed="0.021283"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.286488" level="INFO">&amp;{item} = { title=Mesaerion: The Best Science ... | price=£37.59 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.286488" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.286488" elapsed="0.000000"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.45")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:47.153866" elapsed="0.132622"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.316849" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.102")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.286488" elapsed="0.031358"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.339446" level="INFO">${title} = Libertarianism for Beginners</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.318118" elapsed="0.022444"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.360514" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.103")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.340562" elapsed="0.019952"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.381589" level="INFO">${price} = £51.33</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.360514" elapsed="0.022072"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.404043" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.104")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.382586" elapsed="0.021457"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.425150" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.404043" elapsed="0.021107"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.425150" level="INFO">&amp;{item} = { title=Libertarianism for Beginners | price=£51.33 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.425150" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.425150" elapsed="0.000000"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.46")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:47.286488" elapsed="0.138662"/>
+</iter>
+<iter>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.453172" level="INFO">${title_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.105")&gt;</msg>
+<var>${title_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${TITLE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.433494" elapsed="0.019678"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.475239" level="INFO">${title} = It's Only the Himalayas</msg>
+<var>${title}</var>
+<arg>${title_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.453172" elapsed="0.022067"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.494763" level="INFO">${price_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.106")&gt;</msg>
+<var>${price_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${PRICE_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.475239" elapsed="0.019524"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.518539" level="INFO">${price} = £45.17</msg>
+<var>${price}</var>
+<arg>${price_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.494763" elapsed="0.024463"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.539736" level="INFO">${stock_el} = &lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.107")&gt;</msg>
+<var>${stock_el}</var>
+<arg>${el}</arg>
+<arg>find_element</arg>
+<arg>xpath</arg>
+<arg>${STOCK_LOCATOR}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.520271" elapsed="0.020462"/>
+</kw>
+<kw name="Get Text" owner="RPA.Browser.Selenium">
+<msg time="2025-12-04T11:56:47.561237" level="INFO">${stock} = In stock</msg>
+<var>${stock}</var>
+<arg>${stock_el}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.540733" elapsed="0.021547"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.562280" level="INFO">&amp;{item} = { title=It's Only the Himalayas | price=£45.17 | stock=In stock }</msg>
+<var>&amp;{item}</var>
+<arg>title=${title}</arg>
+<arg>price=${price}</arg>
+<arg>stock=${stock}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.562280" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${books}</arg>
+<arg>${item}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.562280" elapsed="0.000000"/>
+</kw>
+<var name="${el}">&lt;selenium.webdriver.remote.webelement.WebElement (session="3898e4ac9ddb4c565c614acbe9ffae4d", element="f.94948DDEC38BD8AE0FF22CE52D16AB3E.d.3D51B3E07FC4E5CCC326FDA67DE9B7CA.e.47")&gt;</var>
+<status status="PASS" start="2025-12-04T11:56:47.433494" elapsed="0.128786"/>
+</iter>
+<var>${el}</var>
+<value>@{elements}</value>
+<status status="PASS" start="2025-12-04T11:56:45.023160" elapsed="2.539120"/>
+</for>
+<return>
+<value>${books}</value>
+<status status="PASS" start="2025-12-04T11:56:47.569046" elapsed="0.000000"/>
+</return>
+<msg time="2025-12-04T11:56:47.570043" level="INFO">${data} = [{'title': 'A Light in the ...', 'price': '£51.77', 'stock': 'In stock'}, {'title': 'Tipping the Velvet', 'price': '£53.74', 'stock': 'In stock'}, {'title': 'Soumission', 'price': '£50.10', 'stock': '...</msg>
+<var>${data}</var>
+<status status="PASS" start="2025-12-04T11:56:44.956472" elapsed="2.613571"/>
+</kw>
+<kw name="Process Book Data" owner="utils">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.570043" level="INFO">@{result} = [ ]</msg>
+<var>@{result}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.570043" elapsed="0.000000"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.570043" level="INFO">${price_str} = £51.77</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.570043" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.570043" level="INFO">${price_num} = 51.77</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.570043" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.570043" level="INFO">${price_num} = 51.77</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.570043" elapsed="0.014656"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.585696" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.585696" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.585696" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.585696" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.585696" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.585696" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.585696" level="INFO">&amp;{new} = { title=A Light in the ... | price=51.77 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.585696" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.585696" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'A Light in the ...', 'price': '£51.77', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.570043" elapsed="0.015653"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.585696" level="INFO">${price_str} = £53.74</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.585696" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.600313" level="INFO">${price_num} = 53.74</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.600313" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.600313" level="INFO">${price_num} = 53.74</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.600313" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.600313" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.600313" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.600313" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.600313" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.600313" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.600313" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.600313" level="INFO">&amp;{new} = { title=Tipping the Velvet | price=53.74 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.600313" elapsed="0.016043"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.616356" elapsed="0.002130"/>
+</kw>
+<var name="${b}">{'title': 'Tipping the Velvet', 'price': '£53.74', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.585696" elapsed="0.032790"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.619528" level="INFO">${price_str} = £50.10</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.619528" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.619528" level="INFO">${price_num} = 50.10</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.619528" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.619528" level="INFO">${price_num} = 50.1</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.619528" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.619528" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.619528" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.619528" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.619528" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.619528" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.619528" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.636229" level="INFO">&amp;{new} = { title=Soumission | price=50.1 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.619528" elapsed="0.016701"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.636229" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'Soumission', 'price': '£50.10', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.618486" elapsed="0.017743"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.636229" level="INFO">${price_str} = £47.82</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.636229" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.636229" level="INFO">${price_num} = 47.82</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.636229" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.636229" level="INFO">${price_num} = 47.82</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.636229" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.636229" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.636229" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.653091" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.652188" elapsed="0.000903"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.636229" elapsed="0.016862"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.636229" elapsed="0.016862"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.653091" level="INFO">&amp;{new} = { title=Sharp Objects | price=47.82 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.653091" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.653091" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'Sharp Objects', 'price': '£47.82', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.636229" elapsed="0.016862"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.661211" level="INFO">${price_str} = £54.23</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.661211" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.661211" level="INFO">${price_num} = 54.23</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.661211" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.669257" level="INFO">${price_num} = 54.23</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.661211" elapsed="0.008046"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.669257" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.669257" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.669257" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.669257" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.669257" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.669257" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.669257" level="INFO">&amp;{new} = { title=Sapiens: A Brief History ... | price=54.23 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.669257" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.669257" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'Sapiens: A Brief History ...', 'price': '£54.23', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.653091" elapsed="0.016166"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.669257" level="INFO">${price_str} = £22.65</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.669257" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.685993" level="INFO">${price_num} = 22.65</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.684990" elapsed="0.001003"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.685993" level="INFO">${price_num} = 22.65</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.685993" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.685993" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.685993" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.685993" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.685993" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.685993" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.685993" level="INFO">&amp;{new} = { title=The Requiem Red | price=22.65 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.685993" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.700560" elapsed="0.001009"/>
+</kw>
+<var name="${b}">{'title': 'The Requiem Red', 'price': '£22.65', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.669257" elapsed="0.033342"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.702599" level="INFO">${price_str} = £33.34</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.702599" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.702599" level="INFO">${price_num} = 33.34</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.702599" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.702599" level="INFO">${price_num} = 33.34</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.702599" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.702599" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.702599" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.702599" elapsed="0.013546"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.702599" elapsed="0.013740"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.702599" elapsed="0.013740"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.719404" level="INFO">&amp;{new} = { title=The Dirty Little Secrets ... | price=33.34 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.717337" elapsed="0.002845"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.720182" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'The Dirty Little Secrets ...', 'price': '£33.34', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.702599" elapsed="0.017583"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.720182" level="INFO">${price_str} = £17.93</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.720182" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.720182" level="INFO">${price_num} = 17.93</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.720182" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.720182" level="INFO">${price_num} = 17.93</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.720182" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.720182" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.720182" elapsed="0.014516"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.735693" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.735693" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.735693" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.735693" level="INFO">&amp;{new} = { title=The Coming Woman: A ... | price=17.93 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.735693" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.735693" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'The Coming Woman: A ...', 'price': '£17.93', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.720182" elapsed="0.015511"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.735693" level="INFO">${price_str} = £22.60</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.735693" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.735693" level="INFO">${price_num} = 22.60</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.735693" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.752509" level="INFO">${price_num} = 22.6</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.735693" elapsed="0.016816"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.752509" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.752509" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.752509" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.752509" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.752509" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.752509" level="INFO">&amp;{new} = { title=The Boys in the ... | price=22.6 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.752509" elapsed="0.008180"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.760948" elapsed="0.001033"/>
+</kw>
+<var name="${b}">{'title': 'The Boys in the ...', 'price': '£22.60', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.735693" elapsed="0.026288"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.761981" level="INFO">${price_str} = £52.15</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.761981" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.761981" level="INFO">${price_num} = 52.15</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.761981" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.771203" level="INFO">${price_num} = 52.15</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.770207" elapsed="0.000996"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.771203" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.771203" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.771203" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.771203" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.771203" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.771203" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.779369" level="INFO">&amp;{new} = { title=The Black Maria | price=52.15 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.779369" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.779369" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'The Black Maria', 'price': '£52.15', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.761981" elapsed="0.017388"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.787247" level="INFO">${price_str} = £13.99</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.785253" elapsed="0.002990"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.790793" level="INFO">${price_num} = 13.99</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.788243" elapsed="0.002550"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.792785" level="INFO">${price_num} = 13.99</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.791801" elapsed="0.001981"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.795303" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.794782" elapsed="0.000521"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.797288" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.796288" elapsed="0.001000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.796288" elapsed="0.001000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.799479" level="INFO">&amp;{new} = { title=Starving Hearts (Triangular Trade ... | price=13.99 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.798284" elapsed="0.001195"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.800534" elapsed="0.000956"/>
+</kw>
+<var name="${b}">{'title': 'Starving Hearts (Triangular Trade ...', 'price': '£13.99', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.779369" elapsed="0.022121"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.802971" level="INFO">${price_str} = £20.66</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.802489" elapsed="0.000993"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.804479" level="INFO">${price_num} = 20.66</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.803482" elapsed="0.000997"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.806360" level="INFO">${price_num} = 20.66</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.805475" elapsed="0.000885"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.807483" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.806360" elapsed="0.001123"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.809025" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.807483" elapsed="0.001969"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.807483" elapsed="0.001969"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.810453" level="INFO">&amp;{new} = { title=Shakespeare's Sonnets | price=20.66 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.809452" elapsed="0.001001"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.810453" elapsed="0.001435"/>
+</kw>
+<var name="${b}">{'title': "Shakespeare's Sonnets", 'price': '£20.66', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.802489" elapsed="0.009413"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.812893" level="INFO">${price_str} = £17.46</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.811902" elapsed="0.001460"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.814526" level="INFO">${price_num} = 17.46</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.813362" elapsed="0.001164"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.816224" level="INFO">${price_num} = 17.46</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.815514" elapsed="0.000710"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.817368" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.816224" elapsed="0.001144"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.818648" elapsed="0.000987"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.818648" elapsed="0.000987"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.818222" elapsed="0.001413"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.821334" level="INFO">&amp;{new} = { title=Set Me Free | price=17.46 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.820300" elapsed="0.001034"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.821723" elapsed="0.001001"/>
+</kw>
+<var name="${b}">{'title': 'Set Me Free', 'price': '£17.46', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.811902" elapsed="0.010822"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.823722" level="INFO">${price_str} = £52.29</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.823722" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.826175" level="INFO">${price_num} = 52.29</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.824717" elapsed="0.001458"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.827174" level="INFO">${price_num} = 52.29</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.826175" elapsed="0.000999"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.828592" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.828170" elapsed="0.000422"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.829956" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.829956" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.829589" elapsed="0.001366"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.829589" elapsed="0.001366"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.831320" level="INFO">&amp;{new} = { title=Scott Pilgrim's Precious Little ... | price=52.29 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.831320" elapsed="0.000999"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.832319" elapsed="0.000593"/>
+</kw>
+<var name="${b}">{'title': "Scott Pilgrim's Precious Little ...", 'price': '£52.29', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.822724" elapsed="0.010188"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.834259" level="INFO">${price_str} = £35.02</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.834259" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.836287" level="INFO">${price_num} = 35.02</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.835258" elapsed="0.001029"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.836287" level="INFO">${price_num} = 35.02</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.836287" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.838540" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.836287" elapsed="0.002253"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.838540" elapsed="0.000999"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.838540" elapsed="0.000999"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.838540" elapsed="0.000999"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.839539" level="INFO">&amp;{new} = { title=Rip it Up and ... | price=35.02 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'Rip it Up and ...', 'price': '£35.02', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.832912" elapsed="0.006627"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.839539" level="INFO">${price_str} = £57.25</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.839539" level="INFO">${price_num} = 57.25</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.839539" level="INFO">${price_num} = 57.25</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.839539" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.839539" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.009973"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.850953" level="INFO">&amp;{new} = { title=Our Band Could Be ... | price=57.25 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.849512" elapsed="0.001441"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.850953" elapsed="0.000998"/>
+</kw>
+<var name="${b}">{'title': 'Our Band Could Be ...', 'price': '£57.25', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.839539" elapsed="0.012412"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.852963" level="INFO">${price_str} = £23.88</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.852963" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.853960" level="INFO">${price_num} = 23.88</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.853960" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.853960" level="INFO">${price_num} = 23.88</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.853960" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.853960" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.853960" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.857800" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.853960" elapsed="0.003840"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.853960" elapsed="0.004837"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.859792" level="INFO">&amp;{new} = { title=Olio | price=23.88 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.858797" elapsed="0.000995"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.859792" elapsed="0.000999"/>
+</kw>
+<var name="${b}">{'title': 'Olio', 'price': '£23.88', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.851951" elapsed="0.008840"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.861689" level="INFO">${price_str} = £37.59</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.861689" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.863701" level="INFO">${price_num} = 37.59</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.862703" elapsed="0.000998"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.864700" level="INFO">${price_num} = 37.59</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.863701" elapsed="0.000999"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.866696" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.865697" elapsed="0.000999"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:47.867691" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:47.866696" elapsed="0.000995"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.866696" elapsed="0.000995"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.868689" level="INFO">&amp;{new} = { title=Mesaerion: The Best Science ... | price=37.59 | stock=In stock | status=OK }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.867691" elapsed="0.000998"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.869687" elapsed="0.000392"/>
+</kw>
+<var name="${b}">{'title': 'Mesaerion: The Best Science ...', 'price': '£37.59', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.860791" elapsed="0.009288"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.871077" level="INFO">${price_str} = £51.33</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.871077" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.871077" level="INFO">${price_num} = 51.33</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.871077" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.874094" level="INFO">${price_num} = 51.33</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.871077" elapsed="0.003017"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.875091" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.874094" elapsed="0.000997"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.875091" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.875091" level="INFO">&amp;{new} = { title=Libertarianism for Beginners | price=51.33 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': 'Libertarianism for Beginners', 'price': '£51.33', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.870079" elapsed="0.005012"/>
+</iter>
+<iter>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.875091" level="INFO">${price_str} = £45.17</msg>
+<var>${price_str}</var>
+<arg>${b}[price]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-12-04T11:56:47.875091" level="INFO">${price_num} = 45.17</msg>
+<var>${price_num}</var>
+<arg>${price_str}</arg>
+<arg>£</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Number" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.883376" level="INFO">${price_num} = 45.17</msg>
+<var>${price_num}</var>
+<arg>${price_num}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.008285"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.884373" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>OK</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.883376" elapsed="0.000997"/>
+</kw>
+<if>
+<branch type="IF" condition="${price_num} &gt; 40">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.884373" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>PREMIUM</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.000000"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.884373" level="INFO">&amp;{new} = { title=It's Only the Himalayas | price=45.17 | stock=In stock | status=PREMIUM }</msg>
+<var>&amp;{new}</var>
+<arg>title=${b}[title]</arg>
+<arg>price=${price_num}</arg>
+<arg>stock=${b}[stock]</arg>
+<arg>status=${status}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.000000"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${result}</arg>
+<arg>${new}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.000000"/>
+</kw>
+<var name="${b}">{'title': "It's Only the Himalayas", 'price': '£45.17', 'stock': 'In stock'}</var>
+<status status="PASS" start="2025-12-04T11:56:47.875091" elapsed="0.009282"/>
+</iter>
+<var>${b}</var>
+<value>@{books}</value>
+<status status="PASS" start="2025-12-04T11:56:47.570043" elapsed="0.314330"/>
+</for>
+<return>
+<value>${result}</value>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.000000"/>
+</return>
+<msg time="2025-12-04T11:56:47.884373" level="INFO">${processed} = [{'title': 'A Light in the ...', 'price': 51.77, 'stock': 'In stock', 'status': 'PREMIUM'}, {'title': 'Tipping the Velvet', 'price': 53.74, 'stock': 'In stock', 'status': 'PREMIUM'}, {'title': 'Soumis...</msg>
+<var>${processed}</var>
+<arg>${data}</arg>
+<status status="PASS" start="2025-12-04T11:56:47.570043" elapsed="0.314330"/>
+</kw>
+<kw name="Save Books To Excel" owner="keywords_excel">
+<kw name="Create Workbook" owner="RPA.Excel.Files">
+<arg>${file}</arg>
+<doc>Create and open a new Excel workbook.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.000000"/>
+</kw>
+<kw name="Append Rows To Worksheet" owner="RPA.Excel.Files">
+<arg>${data}</arg>
+<arg>header=True</arg>
+<doc>Append values to the end of the worksheet.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.000000"/>
+</kw>
+<kw name="Save Workbook" owner="RPA.Excel.Files">
+<doc>Save the active workbook.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.019846"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-04T11:56:47.905452" level="INFO">Data saved to Excel: C:\QA\MonitoringBuku\Tasks/../data/books.xlsx</msg>
+<arg>Data saved to Excel: ${file}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.904219" elapsed="0.001233"/>
+</kw>
+<arg>${processed}</arg>
+<arg>C:\\QA\\MonitoringBuku\\Tasks/../data/books.xlsx</arg>
+<status status="PASS" start="2025-12-04T11:56:47.884373" elapsed="0.021079"/>
+</kw>
+<kw name="Close Browser" owner="RPA.Browser.Selenium">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-12-04T11:56:47.906450" elapsed="2.171005"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:39.584747" elapsed="10.493743"/>
+</kw>
+<kw name="Generate Excel Report" owner="reporting">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.084564" level="INFO">${file} = C:\QA\MonitoringBuku\Tasks/../data/books.xlsx</msg>
+<var>${file}</var>
+<arg>C:\\QA\\MonitoringBuku\\Tasks/../data/books.xlsx</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.083418" elapsed="0.002434"/>
+</kw>
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2025-12-04T11:56:50.089005" level="INFO" html="true">File '&lt;a href="file://C:\QA\MonitoringBuku\data\books.xlsx"&gt;C:\QA\MonitoringBuku\data\books.xlsx&lt;/a&gt;' exists.</msg>
+<arg>${file}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.086856" elapsed="0.003199"/>
+</kw>
+<kw name="Open Workbook" owner="RPA.Excel.Files">
+<msg time="2025-12-04T11:56:50.092906" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x00000273CFAAF250&gt;</msg>
+<msg time="2025-12-04T11:56:50.119063" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x00000273CFAF08D0&gt;</msg>
+<arg>${file}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.090998" elapsed="0.028065"/>
+</kw>
+<kw name="Read Worksheet As Table" owner="RPA.Excel.Files">
+<msg time="2025-12-04T11:56:50.122322" level="INFO">Created table: Table(columns=['title', 'price', 'stock', 'status'], rows=20)</msg>
+<msg time="2025-12-04T11:56:50.122322" level="INFO">${books} = Table(columns=['title', 'price', 'stock', 'status'], rows=20)</msg>
+<var>${books}</var>
+<arg>header=True</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.120014" elapsed="0.003351"/>
+</kw>
+<kw name="Close Workbook" owner="RPA.Excel.Files">
+<msg time="2025-12-04T11:56:50.124660" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x00000273CFAF08D0&gt;</msg>
+<doc>Close the active workbook.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.123532" elapsed="0.001128"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.125692" level="INFO">Length is 20.</msg>
+<msg time="2025-12-04T11:56:50.126691" level="INFO">${total} = 20</msg>
+<var>${total}</var>
+<arg>${books}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.124660" elapsed="0.002031"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.127651" level="INFO">${premium} = 0</msg>
+<var>${premium}</var>
+<arg>0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.126691" elapsed="0.000960"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.128649" level="INFO">${low} = 0</msg>
+<var>${low}</var>
+<arg>0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.127651" elapsed="0.000998"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.129646" level="INFO">${ok} = 0</msg>
+<var>${ok}</var>
+<arg>0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.129646" elapsed="0.000998"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.132640" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.131641" elapsed="0.000999"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.134010" level="INFO">${premium} = 1</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.134010" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.132640" elapsed="0.002388"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.135028" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.135028" elapsed="0.000997"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.136025" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.136025" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.132640" elapsed="0.003385"/>
+</if>
+<var name="${book}">{'title': 'A Light in the ...', 'price': 51.77, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.131641" elapsed="0.004384"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.138151" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.137055" elapsed="0.001096"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.139148" level="INFO">${premium} = 2</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.139148" elapsed="0.000998"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.138151" elapsed="0.001995"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.140146" elapsed="0.000982"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.140146" elapsed="0.000982"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.141128" elapsed="0.001031"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.141128" elapsed="0.001031"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.138151" elapsed="0.004008"/>
+</if>
+<var name="${book}">{'title': 'Tipping the Velvet', 'price': 53.74, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.137055" elapsed="0.005104"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.143157" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.143157" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.144810" level="INFO">${premium} = 3</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.144810" elapsed="0.000998"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.143157" elapsed="0.002651"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.146805" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.145808" elapsed="0.000997"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.147836" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.146805" elapsed="0.001031"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.143157" elapsed="0.004679"/>
+</if>
+<var name="${book}">{'title': 'Soumission', 'price': 50.1, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.142159" elapsed="0.006353"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.149920" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.148714" elapsed="0.001206"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.151924" level="INFO">${premium} = 4</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.150919" elapsed="0.001005"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.149920" elapsed="0.002004"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.152912" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.151924" elapsed="0.000988"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.153912" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.153912" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.149920" elapsed="0.003992"/>
+</if>
+<var name="${book}">{'title': 'Sharp Objects', 'price': 47.82, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.148714" elapsed="0.005198"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.155906" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.154909" elapsed="0.001209"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.157149" level="INFO">${premium} = 5</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.156118" elapsed="0.001031"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.156118" elapsed="0.001031"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.158148" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.158148" elapsed="0.000962"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.159218" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.159218" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.156118" elapsed="0.003100"/>
+</if>
+<var name="${book}">{'title': 'Sapiens: A Brief History ...', 'price': 54.23, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.154909" elapsed="0.005308"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.161247" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.160217" elapsed="0.001030"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.161695" elapsed="0.001104"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.161695" elapsed="0.001104"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.162799" elapsed="0.001035"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.162799" elapsed="0.001035"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.165418" level="INFO">${ok} = 1</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.164828" elapsed="0.000590"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.163834" elapsed="0.001584"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.161695" elapsed="0.003723"/>
+</if>
+<var name="${book}">{'title': 'The Requiem Red', 'price': 22.65, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.160217" elapsed="0.005201"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.168009" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.167206" elapsed="0.001174"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.169379" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.168629" elapsed="0.000750"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.170376" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.169379" elapsed="0.000997"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.172147" level="INFO">${ok} = 2</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.171374" elapsed="0.000860"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.170376" elapsed="0.001858"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.168629" elapsed="0.004148"/>
+</if>
+<var name="${book}">{'title': 'The Dirty Little Secrets ...', 'price': 33.34, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.166162" elapsed="0.006615"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.173798" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.173798" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.174798" elapsed="0.000998"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.174798" elapsed="0.000998"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.175796" elapsed="0.001028"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.175796" elapsed="0.001028"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.177824" level="INFO">${ok} = 3</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.176824" elapsed="0.001000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.176824" elapsed="0.001000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.174798" elapsed="0.003026"/>
+</if>
+<var name="${book}">{'title': 'The Coming Woman: A ...', 'price': 17.93, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.172777" elapsed="0.005047"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.179222" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.179222" elapsed="0.000999"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.180221" elapsed="0.000996"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.180221" elapsed="0.000996"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.182361" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.181217" elapsed="0.001144"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.184261" level="INFO">${ok} = 4</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.183306" elapsed="0.001269"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.182361" elapsed="0.002214"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.180221" elapsed="0.004354"/>
+</if>
+<var name="${book}">{'title': 'The Boys in the ...', 'price': 22.6, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.177824" elapsed="0.006751"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.186291" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.185295" elapsed="0.000996"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.188251" level="INFO">${premium} = 6</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.187289" elapsed="0.000962"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.186291" elapsed="0.001960"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.189300" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.189248" elapsed="0.000052"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.190298" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.189300" elapsed="0.000998"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.186291" elapsed="0.004007"/>
+</if>
+<var name="${book}">{'title': 'The Black Maria', 'price': 52.15, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.185295" elapsed="0.005003"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.191294" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.191294" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.193083" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.191294" elapsed="0.001789"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.194148" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.193083" elapsed="0.001065"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.195265" level="INFO">${ok} = 5</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.194148" elapsed="0.001117"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.194148" elapsed="0.001117"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.191294" elapsed="0.003971"/>
+</if>
+<var name="${book}">{'title': 'Starving Hearts (Triangular Trade ...', 'price': 13.99, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.191294" elapsed="0.003971"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.197261" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.196298" elapsed="0.000963"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.198257" elapsed="0.000478"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.197261" elapsed="0.001474"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.199803" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.199255" elapsed="0.000548"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.200801" level="INFO">${ok} = 6</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.200801" elapsed="0.001036"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.199803" elapsed="0.002034"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.197261" elapsed="0.004576"/>
+</if>
+<var name="${book}">{'title': "Shakespeare's Sonnets", 'price': 20.66, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.195265" elapsed="0.006572"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.202795" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.202795" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.203812" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.203812" elapsed="0.000977"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.204789" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.204789" elapsed="0.001054"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.206844" level="INFO">${ok} = 7</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.205843" elapsed="0.001001"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.205843" elapsed="0.001001"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.203812" elapsed="0.003032"/>
+</if>
+<var name="${book}">{'title': 'Set Me Free', 'price': 17.46, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.201837" elapsed="0.005007"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.208045" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.208045" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.210039" level="INFO">${premium} = 7</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.209043" elapsed="0.000996"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.209043" elapsed="0.000996"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.211087" elapsed="0.000331"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.210039" elapsed="0.001379"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.211418" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.211418" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.208045" elapsed="0.004373"/>
+</if>
+<var name="${book}">{'title': "Scott Pilgrim's Precious Little ...", 'price': 52.29, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.206844" elapsed="0.005574"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.212418" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.212418" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.213447" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.213447" elapsed="0.000967"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.214414" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.214414" elapsed="0.000993"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.216674" level="INFO">${ok} = 8</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.215407" elapsed="0.001267"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.215407" elapsed="0.002159"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.213447" elapsed="0.004119"/>
+</if>
+<var name="${book}">{'title': 'Rip it Up and ...', 'price': 35.02, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.212418" elapsed="0.005148"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.218612" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.217827" elapsed="0.001318"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.220159" level="INFO">${premium} = 8</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.220086" elapsed="0.000073"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.219145" elapsed="0.001014"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.221353" elapsed="0.000291"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.220159" elapsed="0.001485"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.221644" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.221644" elapsed="0.001036"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.219145" elapsed="0.003535"/>
+</if>
+<var name="${book}">{'title': 'Our Band Could Be ...', 'price': 57.25, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.217827" elapsed="0.004853"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.223764" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.222680" elapsed="0.001084"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.223764" elapsed="0.000997"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.223764" elapsed="0.000997"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.224761" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.224761" elapsed="0.001030"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.225791" level="INFO">${ok} = 9</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.225791" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.225791" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.223764" elapsed="0.002027"/>
+</if>
+<var name="${book}">{'title': 'Olio', 'price': 23.88, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.222680" elapsed="0.003111"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.227471" level="INFO">${status} = OK</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.227471" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.228468" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.227471" elapsed="0.000997"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.229500" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.228468" elapsed="0.001032"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.230463" level="INFO">${ok} = 10</msg>
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.230463" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.229500" elapsed="0.000963"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.227471" elapsed="0.002992"/>
+</if>
+<var name="${book}">{'title': 'Mesaerion: The Best Science ...', 'price': 37.59, 'stock': 'In stock', 'status': 'OK'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.225791" elapsed="0.005669"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.232457" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.232410" elapsed="0.000951"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.234882" level="INFO">${premium} = 9</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.234429" elapsed="0.000453"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.233431" elapsed="0.001451"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.235913" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.234882" elapsed="0.001031"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.235913" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.235913" elapsed="0.001001"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.233431" elapsed="0.003483"/>
+</if>
+<var name="${book}">{'title': 'Libertarianism for Beginners', 'price': 51.33, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.231460" elapsed="0.005454"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-12-04T11:56:50.237875" level="INFO">${status} = PREMIUM</msg>
+<var>${status}</var>
+<arg>${book}</arg>
+<arg>status</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.236914" elapsed="0.001154"/>
+</kw>
+<if>
+<branch type="IF" condition="'${status}' == 'PREMIUM'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.238068" level="INFO">${premium} = 10</msg>
+<var>${premium}</var>
+<arg>${premium} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.238068" elapsed="0.000997"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.238068" elapsed="0.000997"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'LOW_STOCK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${low}</var>
+<arg>${low} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.239065" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.239065" elapsed="0.000998"/>
+</branch>
+<branch type="ELSE IF" condition="'${status}' == 'OK'">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${ok}</var>
+<arg>${ok} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-12-04T11:56:50.240063" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-12-04T11:56:50.240063" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-12-04T11:56:50.238068" elapsed="0.001995"/>
+</if>
+<var name="${book}">{'title': "It's Only the Himalayas", 'price': 45.17, 'stock': 'In stock', 'status': 'PREMIUM'}</var>
+<status status="PASS" start="2025-12-04T11:56:50.236914" elapsed="0.003149"/>
+</iter>
+<var>${book}</var>
+<value>@{books}</value>
+<status status="PASS" start="2025-12-04T11:56:50.130644" elapsed="0.110417"/>
+</for>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.241061" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>=====================================</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.241061" elapsed="0.000997"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>REPORT SUMMARY</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.242058" elapsed="0.000997"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>=====================================</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.243055" elapsed="0.000000"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.244076" level="INFO">${line1} = Total Books:20</msg>
+<var>${line1}</var>
+<arg>SEPARATOR=</arg>
+<arg>Total Books</arg>
+<arg>:</arg>
+<arg>${total}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.244076" elapsed="0.000000"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.245268" level="INFO">${line2} = Premium Books:10</msg>
+<var>${line2}</var>
+<arg>SEPARATOR=</arg>
+<arg>Premium Books</arg>
+<arg>:</arg>
+<arg>${premium}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.244076" elapsed="0.001192"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2025-12-04T11:56:50.246266" level="INFO">${line3} = OK Books:10</msg>
+<var>${line3}</var>
+<arg>SEPARATOR=</arg>
+<arg>OK Books</arg>
+<arg>:</arg>
+<arg>${ok}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.245268" elapsed="0.000998"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${line1}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.246266" elapsed="0.000997"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${line2}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.247263" elapsed="0.000997"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${line3}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.248675" elapsed="0.000998"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>=====================================</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.249673" elapsed="0.000775"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-04T11:56:50.250905" elapsed="0.000593"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:50.080712" elapsed="0.170786"/>
+</kw>
+<status status="PASS" start="2025-12-04T11:56:39.551237" elapsed="10.700261"/>
+</test>
+<doc>Real website scraping + validation + reporting workflow</doc>
+<status status="PASS" start="2025-12-04T11:56:38.597867" elapsed="11.664091"/>
+</suite>
+<status status="PASS" start="2025-12-04T11:56:38.592228" elapsed="11.675332"/>
+</suite>
+<status status="PASS" start="2025-12-04T11:56:38.544054" elapsed="11.733902"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="MonitoringBuku" id="s1" pass="1" fail="0" skip="0">MonitoringBuku</stat>
+<stat name="Tasks" id="s1-s1" pass="1" fail="0" skip="0">MonitoringBuku.Tasks</stat>
+<stat name="Main" id="s1-s1-s1" pass="1" fail="0" skip="0">MonitoringBuku.Tasks.Main</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
